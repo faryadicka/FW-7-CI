@@ -7,7 +7,11 @@ const reverseWord = (sentence) => {
       found = found + sentence[i]
     }
     if (sentence[i] === " ") {
-      result = found + " " + result
+      if (result !== "") {
+        result = found + " " + result
+        found = ""
+      }
+      result = found + result
       found = ""
     }
     if (i === sentence.length - 1) {
