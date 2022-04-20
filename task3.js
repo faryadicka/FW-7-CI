@@ -7,36 +7,33 @@ const arkFood = (price, voucher, distance, tax) => {
   let diskonArka = price * (50 / 100)
   let diskonDemy = price * (60 / 100)
   let potongan = 0
-  let biayaAntar = 0
+  let biayaAntar = 5000
   let pajak = 0
   let subTotal = 0
   const maksDiskonArka = 50000
   const maksDiskonDemy = 30000
-  const ongkir2km = 5000
 
-  if (voucher === "ARKAFOOD5" && price >= 50000 && diskonArka <= 50000) {
-    potongan = potongan + diskonArka
-  } else if (voucher === "ARKAFOOD5" && price >= 50000 && diskonArka > 50000) {
-    potongan = potongan + maksDiskonArka
+  if (voucher !== "ARKAFOOD5" && voucher !== "DITRAKTIRDEMY") potongan
+  if (voucher === "ARKAFOOD5") {
+    if (price >= 50000 && diskonArka <= maksDiskonArka) {
+      potongan = diskonArka
+    } else if (price >= 50000 && diskonArka > maksDiskonArka) {
+      potongan = maksDiskonArka
+    }
   }
 
-  if (voucher === "DITRAKTIRDEMY" && price >= 25000 && diskonDemy <= 30000) {
-    potongan = potongan + diskonDemy
-  } else if (voucher === "DITRAKTIRDEMY" && price >= 25000 && diskonDemy > 30000) {
-    potongan = potongan + maksDiskonDemy
+  if (voucher === "DITRAKTIRDEMY") {
+    if (price >= 25000 && diskonDemy <= maksDiskonDemy) {
+      potongan = diskonDemy
+    } else if (price >= 25000 && diskonDemy > maksDiskonDemy) {
+      potongan = maksDiskonDemy
+    }
   }
 
-  if (distance > 2) {
-    biayaAntar = biayaAntar + (distance * 3 - 1) * 1000
-  } else {
-    biayaAntar = biayaAntar + ongkir2km
-  }
+  distance > 2 ? biayaAntar = (distance * 3 - 1) * 1000 : biayaAntar
 
-  if (tax === true) {
-    pajak = pajak + (price * (5 / 100))
-  } else {
-    pajak
-  }
+  tax === true ? pajak = (price * (5 / 100)) : pajak
+
 
   subTotal = subTotal + potongan + biayaAntar + pajak
   return `
@@ -48,6 +45,13 @@ const arkFood = (price, voucher, distance, tax) => {
   `
 }
 
-const resultArka = arkFood(75000, "ARKAFOOD5", 5, true)
-const resultDemy = arkFood(55000, "DITRAKTIRDEMY", 5, true)
-console.log(resultDemy)
+const resultArka = arkFood(75000, "DITRAKTIRDEMY", 5, true)
+console.log(`Hasil normal ARKAFOOD5 :`, resultArka)
+// const resultArkaTanpadiskon = arkFood(45000, "ARKAFOOD5", 5, true)
+// const resultArkaTambahJarak = arkFood(75000, "ARKAFOOD5", 7, true)
+// const resultArkaTanpaPajak = arkFood(75000, "ARKAFOOD5", 7, false)
+// const resultDemy = arkFood(55000, "DITRAKTIRDEMY", 5, true)
+// console.log(`Hasil tanpa diskon`, resultArkaTanpadiskon)
+// console.log(`Hasil tambah jarak: `, resultArkaTambahJarak)
+// console.log(`Hasil tanpa pajak: `, resultArkaTanpaPajak)
+// console.log(`Hasil normal DITRAKRIYDEMY :`, resultDemy)
