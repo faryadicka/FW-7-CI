@@ -21,19 +21,19 @@ const divideAndSort = (numb) => {
 const hasil = divideAndSort(5956560159466056)
 console.log(hasil)
 
-/* == Revisi atau program buatan baru == */
+/* == Revisi atau program baru == */
 
 const divideAndSortRevisi = (numb) => {
   if (typeof numb !== 'number') return `Input numb harus berupa Number!`
   let res = []
   const toArr = numb.toString().split('0')
   toArr.forEach(item => {
-    const arrNumb = item.split("")
-    const sort = arrNumb.sort().join("")
+    const arrNumb = item.split('')
+    const sort = arrNumb.sort().join('')
     res.push(sort)
   })
 
-  return Number(res.join(""))
+  return Number(res.join(''))
 }
 
 const hasilRevisi = divideAndSortRevisi(5956560159466056)
