@@ -9,5 +9,5 @@ const cekPalindrom = (word) => {
   return `Palindrom`
 }
 
-const hasil = cekPalindrom("Malam")
+const hasil = cekPalindrom("Malim")
 console.log(hasil)
